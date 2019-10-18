@@ -8,14 +8,14 @@
   <style>
     html {
       font-family: sans-serif;
-      background: #ffc600;
+      background: #4b93ff;
     }
     .inbox {
       max-width: 400px;
       margin: 50px auto;
       background: white;
       border-radius: 5px;
-      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.308);
     }
     .item {
       display: flex;
@@ -87,6 +87,29 @@
   </div>
 
 <script>
+const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]')
+
+let lastChecked;
+
+function handleCheck(e){
+    let inBetween = false
+    if(e.shiftKey && this.checked) {
+        checkboxes.forEach(checkbox => {
+            console.log(checkbox)
+            if (checkbox === this || checkbox === lastChecked){
+                inBetween = !inBetween
+                console.log("started to check")
+            }
+            if (inBetween) {
+                checkbox.checked = true
+            }
+        })
+    }
+
+    lastChecked = this
+}
+
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck))
 </script>
 </body>
 </html>
